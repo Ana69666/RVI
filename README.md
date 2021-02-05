@@ -45,7 +45,28 @@
 
 <p>El RVI a construir sigue lo propuesto por Agapiou (2020) , cuya expresión matemática se muestra en la fórmula 1. Este índice oscila entre 0 y 1, como medida de la aleatoriedad de la retrodispersión. Los valores cercanos a cero se encuentran relacionados con coberturas lisas o descubiertas, el aumento de este índice está ligado a una mayor cobertura vegetal (Fig 1).</p> 
 
-<h2>RVI =(VV/(VV+VH))<sup>0.5</sup>(4VH)/(VV+VH) </h2>              (1)
+<h2>RVI =(VV/(VV+VH))<sup>0.5</sup>(4VH)/(VV+VH) (1) </h2>              
 
 <img src="Fig1.png" />
 <h4 id="Sección3">Fig 1. Índice de Vegetación con Radar.</h4>
+
+<p><h3>2.1. Objetivos de aprendizaje:</h3></p>
+
+<p><li>Introducir al manejo de la interfaz de editor de código de GEE.</li>
+<li>Analizar los procesos de interacción de la señal SAR con la superficie terrestre.</li>
+<li>Observar y monitorear los cambios temporales en cultivos de caña a partir de un RVI.</li>
+
+<p><h2 id="Sección3">3. Interfaz de Google Earth Engine</h2></p>
+ 
+
+<p>Para abrir el editor de código ingrese en: <a href="https://earthengine.google.com/" target="_blank">https://earthengine.google.com/</a>, y ubiquese en la opción  (Fig 1), luego seleccione Code Editor.</p> 
+  
+<img src="Fig1.png" />
+<h4 id="Sección3">Fig 1. Acceso al code editor desde la página web de Google Earth Engine.</h4>
+
+<p>Una vez hecho esto se le desplegará el editor de código de GEE, el cual se detalla en la Fig 2.</p> 
+  
+<img src="Fig2.png" />
+<h4 id="Sección3">Fig 2. Interfaz de editor de código GEE.</h4>
+
+<p>Es importante señalar que en la plataforma en “repositorio de código” en la sección de <strong>“Examples”</strong> puede encontrar una serie de códigos de ejemplo con diferentes tipos de datos de origen con los cuales puede experimentar y editar a conveniencia para diferentes aplicaciones.<p>
