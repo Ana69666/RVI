@@ -32,3 +32,20 @@
 
 
 <p><h2 id="Sección2">2. Introducción</h2></p>
+
+<p>El monitoreo de cultivos es una de las principales herramientas en agricultura, la estimación del área de cobertura, productividad, incidencia de enfermedades, evolución o cambios en la estructura de los cultivos...etc. Actividades que resultan fundamentales en términos de estudiar y mejorar la actividad agrícola (Mutanga & Kumar, 2019).</p> 
+
+<p>Para el caso de GEE, es una plataforma en la nube que posee acceso de diferentes repositorios de información, caso de Landsat, MODIS, Sentinel, SoilGrids, SRTM, ALOS-Palsar, HydroSheds entre muchos otros que favorecen el monitoreo agrícola de forma gratuita y sin cargas computacionales elevadas. </p> 
+
+<p>La detección remota con sensores ópticos requieren de observaciones con productos de buena calidad, libre de nubes o sombras de nubes para minimizar la confusión espectral de los datos (Shen et al., 2019), sin embargo, en zonas tropicales las coberturas nubosas son constantes y abundantes, su aplicación resulta limitada (Flores et al., 2019). Debido a este aspecto, se ha implementado el uso de la imágenes SAR, la cual despeja la limitante de la nubosidad y permite la obtención continua de información (Flores et al., 2019).</p> 
+
+<p>En tanto los datos SAR son efectivos en este tipo de estudios, sin embargo, la descarga y pre-procesamiento de los datos en “crudo” directamente en el ordenador requiere de alta capacidad de procesamiento, elemento que puede ser omitido con el uso de GEE. El cual, provee información pre-procesada y lista para el análisis y monitoreo agrícola.</p>  
+
+<p>Este manual muestra el procedimiento para construir un índice de Vegetación con Radar (RVI por sus siglas en inglés), índice que tiene un gran potencial en la vigilancia de la dinámica de la vegetación a lo largo de periodos de tiempo (Agapiou, 2020). Cambios en los valores del índice pueden estar relacionados, la disminución de la cobertura vegetal, cambios fenológicos en las plantas, variaciones en la estructura de las plantas, así como cambios en los usos de la tierra (deforestación, urbanización, entre otros).</p> 
+
+<p>El RVI a construir sigue lo propuesto por Agapiou (2020) , cuya expresión matemática se muestra en la fórmula 1. Este índice oscila entre 0 y 1, como medida de la aleatoriedad de la retrodispersión. Los valores cercanos a cero se encuentran relacionados con coberturas lisas o descubiertas, el aumento de este índice está ligado a una mayor cobertura vegetal (Fig 1).</p> 
+
+<h2>RVI =(VV/(VV+VH))<sup>0.5</sup>(4VH)/(VV+VH) </h2>              (1)
+
+<img src="Fig1.png" />
+<h4 id="Sección3">Fig 1. Índice de Vegetación con Radar.</h4>
