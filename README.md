@@ -61,12 +61,12 @@
 
 <p>Para abrir el editor de código ingrese en: <a href="https://earthengine.google.com/" target="_blank">https://earthengine.google.com/</a>, y ubiquese en la opción  (Fig 1), luego seleccione Code Editor.</p> 
   
-<img src="Fig1.png" />
-<h4 id="Sección3">Fig 1. Acceso al code editor desde la página web de Google Earth Engine.</h4>
+<img src="Fig2.png" />
+<h4 id="Sección3">Fig 2. Acceso al code editor desde la página web de Google Earth Engine.</h4>
 
 <p>Una vez hecho esto se le desplegará el editor de código de GEE, el cual se detalla en la Fig 2.</p> 
   
-<img src="Fig2.png" />
-<h4 id="Sección3">Fig 2. Interfaz de editor de código GEE.</h4>
+<img src="Fig3.png" />
+<h4 id="Sección3">Fig 3. Interfaz de editor de código GEE.</h4>
 
 <p>Es importante señalar que en la plataforma en “repositorio de código” en la sección de <strong>“Examples”</strong> puede encontrar una serie de códigos de ejemplo con diferentes tipos de datos de origen con los cuales puede experimentar y editar a conveniencia para diferentes aplicaciones.<p>
