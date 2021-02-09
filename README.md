@@ -71,3 +71,64 @@
 <h4 id="Sección3">Fig 3. Interfaz de editor de código GEE.</h4>
 
 <p>Es importante señalar que en la plataforma en “repositorio de código” en la sección de <strong>“Examples”</strong> puede encontrar una serie de códigos de ejemplo con diferentes tipos de datos de origen con los cuales puede experimentar y editar a conveniencia para diferentes aplicaciones.<p>
+ 
+ <p><h2 id="Sección4">4. Procesamiento y análisis</h2></p>
+ 
+ <p>Primero se debe generar un punto (utilice el administrador de geometrías), a partir del cual se mostrará el nivel de zoom y del centro del despliegue del visualizador, esto se ejecuta a través de la casilla <Strong>Geometry imports</Strong>, en donde se le asigna el nombre de “geometry”. Usando esta misma herramienta se pueden generar las parcelas de su interés (“plot”) con las que se trabajará en el presente manual. 
+
+<p>Una vez realizado este paso se procede a establecer que la visualización se muestra con base a una imagen RGB satelital y se define el centro de visualización y el nivel de zoom respectivamente. </p>
+ 
+
+```javascript
+Map.setOptions('satellite');
+Map.centerObject(geometry, 16);
+```
+
+<p>Se definen las fechas de inicio y final para filtrar la colección de imágenes.</p>
+
+```javascript
+var START1 = ee.Date("2019-01-01");
+var END1 = ee.Date("2020-10-31");
+```
+
+<p>Seguidamente proceda a llamar la colección de imágenes de GRD de Sentinel-1, tanto para las polarizaciones  VV, como VH. Además, se recorta en relación con las parcelas digitalizadas previamente.</p>
+
+```javascript
+ // Call the collection of Sentinel-1 with the polarizations VV and VH
+var collectionVVVH =  ee.ImageCollection('COPERNICUS/S1_GRD')
+.filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VV'))
+.filter(ee.Filter.listContains('transmitterReceiverPolarisation', 'VH'))
+.filter(ee.Filter.eq('orbitProperties_pass', 'DESCENDING'))
+.filter(ee.Filter.eq('instrumentMode', 'IW'))
+.filterBounds(plot)
+.select('VV','VH' )
+.filterDate(START1,END1)
+.map(function(image){return image.clip(plot)});
+```
+
+<p>Puede observar la información de la colección con el siguiente fragmento de código. Las comillas después de la coma y su contenido detallan el nombre con el que se observará la colección en la consola (Fig 4).</p>
+
+
+```javascript
+print(collectionVVVH, 'Collection Sentinel-1')
+```
+
+<img src="Fig4.png" />
+<h4 id="Sección4">Fig 4. Despliegue de la función “print()” en la consola de GEE. </h4>
+ 
+<p>A continuación se prepara la función que utiliza como base la fórmula del RVI. En este punto no hemos aplicado la fórmula sobre la colección es solo la preparación de la función.</p>
+ 
+// This function gets RVI from Sentinel-1 imagery. The formula of RVI was obtained from doi:10.3390/app10144764.
+
+```javascript
+var addRVI = function(image) {
+  return image.addBands(image.expression('(VV/(VV + VH))**0.5*(4*VH)/(VV + VH)', {
+    'VV': image.select('VV'),
+    'VH': image.select('VH'),})
+    .copyProperties(image,['system:time_start','system:index']).set('Date', ee.Date(image.get('system:time_start')).format('yyyy-MM-dd'))
+)};
+```
+ 
+ 
+ 
+ 
