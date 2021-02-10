@@ -129,6 +129,131 @@ var addRVI = function(image) {
 )};
 ```
  
+<p>Una vez ejecutado lo anterior se aplica la función del RVI sobre la colección, es importante recordar que está fórmula se ejecuta sobre valores lineales de retrodispersión, de modo que este paso también se incluye la función de conversión de valores de dB a valores lineales.</p>
+
+```javascript
+// Map the function over the collection.
+var RVICollection = collectionVVVH.map(addRVI).map(function toNatural(image) {
+return ee.Image(10.0).pow(image.select(0).divide(10.0))
+.copyProperties(image,['system:time_start','system:index']).set('Date', ee.Date(image.get('system:time_start')).format('yyyy-MM-dd'))
+  });
+```
+
+<p>Para observar los detalles de la colección se imprime en la consola y además añadimos al visualizador las parcelas digitalizadas.</p>
+
+```javascript
+print(RVICollection, 'RVI');
+Map.addLayer(plot,{},'Plots');
+```
+
+<p>Una vez añadidas las parcelas, se procede con la preparación de los parámetros para observar dos imágenes de diferentes periodos con el RVI calculado.</p>
+
+```javascript
+//Preparation of the input parameters of the layers to be added
+var visParams = {min: 0, max: [1], bands: ['constant'],palette: [
+  '#ff261b','#ff8319', '#ffcf1f', '#d1ff1b', '#87ff19','#18ff29']};
+```
+
+<p>Finalizado la preparación de los parámetros de visualización,se filtra la colección por fecha para seleccionar una imagen de un momento dado. La función “select()” permite seleccionar la banda de cálculo que por defecto se nombra por GEE como “constant”, el cual es el RVI obtenido (Fig 5).</p>
+
+```javascript
+// Display the mapping results of the function .
+var fit = RVICollection.filterDate('2019-12-01','2019-12-22').select('constant')
+var fit2 = RVICollection.filterDate('2020-03-01','2020-03-22').select('constant')
+```
+
+<p>Para desplegar los resultados del RVI en el visualizador de capas (Layers) utilizamos la función “Map.addLayer()”.</p>
+
+
+```javascript
+Map.addLayer(fit, visParams,'RVI of the image 2019-12-20');
+Map.addLayer(fit2, visParams,'RVI of the image 2020-03-13');
+```
+<img src="Fig5.png" />
+<h4 id="Sección4">Fig 5. Resultados obtenidos del RVI 2019-12-20, añadidos al visualizador de datos.</h4>
+
+<img src="Fig6.png" />
+<h4 id="Sección4">Fig 6. Resultados obtenidos del RVI 2020-03-13, añadidos al visualizador de datos.</h4>
+
+<p>Para visualizar los cambios anuales para los dos años de estudio se puede graficar las variaciones promedio del RVI por parcela y determinar posibles causas de estas variaciones. A continuación copie y pegue la siguiente línea de código para establecer los parámetros de entrada del gráfico.</p>
+
+
+```javascript
+var chart = ui.Chart.image.doySeriesByRegion({
+  imageCollection: RVICollection,
+  bandName:'constant',
+  regions: plot,
+  regionReducer: ee.Reducer.mean(),
+  scale: 200,  
+  seriesProperty:'system:index',
+});
+```
+
+<p>Para visualizar el gráfico (Fig 7) en el visualizador de capas (Layers) utilice la siguiente línea de código.</p>
+
+// Add the chart to the map. 
+// Note, in this case, the images not have a Speckle Filter and are a values of RVI that have been obtained with de conversion of dB to linear values
+
+
+```javascript
+chart.style().set({
+  position: 'bottom-left',
+  width: '500px',
+  height: '300px'
+});
+Map.add(chart);
+```
+<img src="Fig7.png" />
+<h4 id="Sección4">Fig 7. Valores promedio por parcela de RVI entre 2019-2020.</h4>
+
+<p>Finalmente puede exportar las parcelas digitalizadas como archivo de extensión .shp a su cuenta de Google Drive desde donde puede descargarla y visualizarla fuera del entorno de GEE.</p>
+
+```javascript
+// Export the SHP (the plots), specifying scale and region.
+Export.table.toDrive({
+collection: plot ,
+description: 'Plots',
+fileFormat: 'SHP',
+});
+```
+<p>Para realizar este proceso debe ir a la sección <Strong>Task</Strong>, en donde se muestra una lista con nombre asignado de salida (“Plots”) y presionar <Strong>RUN</Strong> (Fig 8).</p> 
+
+<img src="Fig8.png" />
+<h4 id="Sección4">Fig 8. Exportar el archivo .shp desde Task.</h4>
+
+<p>Para exportar el RVI como un Geotiff puede utilizar la siguiente expresión. En este caso se exporta el RVI  para la imágen de diciembre 2019, puede replicar este proceso para el RVI de marzo 2020.</p>
+
+```javascript
+// Export the RVI. 
+Export.image.toDrive({
+image: fit,
+description: 'RVI of the image 2019-12-20',
+scale: 30,
+region: plot,
+  maxPixels: 1e13
+fileFormat: 'GeoTIFF',
+});
+```
+
+<p><h2 id="Sección5">5. Conclusiones y recomendaciones.</h2></p>
+
+<p>La gran cantidad de repositorios de información que ofrece GEE, permite el análisis de múltiples fenómenos, sin recurrir a la descarga de información ni cargas computacionales de hardware y software elevadas. A su vez permite el análisis detallado de series de tiempo asociados a sus repositorios de información, tal fue el caso de Sentinel-1 ejecutado en este manual.</p> 
  
+<p>La disponibilidad de imágenes SAR pre-procesadas reduce los tiempos de ejecución. Además de favorecer la ejecución de grandes conjuntos de datos en un mismo proceso (Big data).</p> 
  
- 
+<p>En relación a los diferentes procesos disponibles, la plataforma de GEE posee la capacidad de ejecución de una gran variedad de procesos que permiten el monitoreo no únicamente agrícola sino de diferentes elementos como el bosque, ciudades, cuerpos de agua, inundaciones entre muchos otros que hacen de ella una herramienta muy potente.</p>
+
+<p>Por otro lado, el editor de código ofrece gran versatilidad al ejecutar procesos, no obstante, requiere conocimientos básicos en programación.</p> 
+
+<p>El RVI es un insumo valioso para el monitoreo de cultivos, bosques y otros ecosistemas, especialmente en un contexto tropical donde la nubosidad es constante, y, que limita la generación de índices a partir de sensores ópticos como el popular NDVI.</p>
+
+<p><h2 id="Sección6">6. Bibliografía.</h2></p>
+
+Flores, A. I., Herndon, K. E., Bahadur Thapa, R., & Cherrington, E. (Eds.). (2019). The Synthetic Aperture Radar (SAR) Handbook: Comprehensive Methodologies for Forest Monitoring and Biomass Estimation. <a href="https://doi.org/10.25966/nr2c-s697" target="_blank">https://doi.org/10.25966/nr2c-s697</a></p>
+
+Mutanga, O., & Kumar, L. (2019). Google Earth Engine Applications. Remote Sensing, 11(5), 591.  <a href="https://doi.org/10.3390/rs11050591" target="_blank">https://doi.org/10.3390/rs11050591</a></p>
+
+Shen, W., Li, M., Huang, C., Tao, X., Li, S., & Wei, A. (2019). Mapping annual forest change due to afforestation in Guangdong Province of China using active and passive remote sensing data. Remote Sensing, 11(5), 1-21.  <a href="https://doi.org/10.3390/rs11050490" target="_blank">https://doi.org/10.3390/rs11050490</a></p>
+
+
+
