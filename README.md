@@ -95,7 +95,7 @@ Map.centerObject(geometry, 16);
 
 ```javascript
 var START1 = ee.Date("2020-01-01");
-var END1 = ee.Date("2020-10-31");
+var END1 = ee.Date("2020-12-31");
 ```
 
 <p>Seguidamente proceda a llamar la colección de imágenes de GRD de Sentinel-1, tanto para las polarizaciones  VV, como VH. Además, se recorta en relación con las parcelas digitalizadas previamente.</p>
