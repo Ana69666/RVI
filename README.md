@@ -76,6 +76,11 @@
  
  <p> <Strong><h3>Nota:</h3></Strong> El código ejecutado en el presente manual se puede acceder por medio del siguiente link: <a href="https://code.earthengine.google.com/13fe29de62f88c8659b65beaef02afe6" target="_blank">https://code.earthengine.google.com/13fe29de62f88c8659b65beaef02afe6</a><p>
  
+<p> También pueden acceder a los datos de las parcelas utilizadas en el presente manual en el siguiente link: 
+ <a href="https://drive.google.com/drive/folders/13XEGpP1Gs8Pawdz48Exa7PRGuYC0V-Cz?usp=sharing
+" target="_blank">https://drive.google.com/drive/folders/13XEGpP1Gs8Pawdz48Exa7PRGuYC0V-Cz?usp=sharing
+</a><p>
+ 
  <p>Primero se debe generar un punto (utilice el administrador de geometrías), a partir del cual se mostrará el nivel de zoom y del centro del despliegue del visualizador, esto se ejecuta a través de la casilla <Strong>Geometry imports</Strong>, en donde se le asigna el nombre de “geometry”. Usando esta misma herramienta se pueden generar las parcelas de su interés (“plot”) con las que se trabajará en el presente manual. 
 
 <p>Una vez realizado este paso se procede a establecer que la visualización se muestra con base a una imagen RGB satelital y se define el centro de visualización y el nivel de zoom respectivamente. </p>
