@@ -74,7 +74,7 @@
  
  <p><h2 id="Sección4">4. Procesamiento y análisis</h2></p>
  
- <p> <Strong><h3>Nota:</h3></Strong> El código ejecutado en el presente manual se puede acceder por medio del siguiente link: <a href="https://code.earthengine.google.com/13fe29de62f88c8659b65beaef02afe6" target="_blank">https://code.earthengine.google.com/13fe29de62f88c8659b65beaef02afe6</a><p>
+ <p> <Strong><h3>Nota:</h3></Strong> El código ejecutado en el presente manual se puede acceder por medio del siguiente link: <a href="https://code.earthengine.google.com/196705f589fc389e6406e745cc0fecfc" target="_blank">https://code.earthengine.google.com/196705f589fc389e6406e745cc0fecfc</a><p>
  
 <p> También pueden acceder a los datos de las parcelas utilizadas en el presente manual en el siguiente link: 
  <a href="https://drive.google.com/drive/folders/13XEGpP1Gs8Pawdz48Exa7PRGuYC0V-Cz?usp=sharing
