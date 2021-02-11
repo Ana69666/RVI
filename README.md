@@ -234,7 +234,7 @@ fileFormat: 'SHP',
 // Export the RVI. 
 Export.image.toDrive({
 image: fit,
-description: 'RVI of the image 2019-12-20',
+description: 'RVI of the image 2020-01-01',
 scale: 30,
 region: plot,
   maxPixels: 1e13
