@@ -94,7 +94,7 @@ Map.centerObject(geometry, 16);
 <p>Se definen las fechas de inicio y final para filtrar la colección de imágenes.</p>
 
 ```javascript
-var START1 = ee.Date("2019-01-01");
+var START1 = ee.Date("2020-01-01");
 var END1 = ee.Date("2020-10-31");
 ```
 
@@ -165,7 +165,7 @@ var visParams = {min: 0, max: [1], bands: ['constant'],palette: [
 
 ```javascript
 // Display the mapping results of the function .
-var fit = RVICollection.filterDate('2019-12-01','2019-12-22').select('constant')
+var fit = RVICollection.filterDate('2020-01-01','2020-01-22').select('constant')
 var fit2 = RVICollection.filterDate('2020-03-01','2020-03-22').select('constant')
 ```
 
@@ -173,7 +173,7 @@ var fit2 = RVICollection.filterDate('2020-03-01','2020-03-22').select('constant'
 
 
 ```javascript
-Map.addLayer(fit, visParams,'RVI of the image 2019-12-20');
+Map.addLayer(fit, visParams,'RVI of the image 2020-01-01');
 Map.addLayer(fit2, visParams,'RVI of the image 2020-03-13');
 ```
 <img src="Fig5.png" />
@@ -211,7 +211,7 @@ chart.style().set({
 Map.add(chart);
 ```
 <img src="Fig7.png" />
-<h4 id="Sección4">Fig 7. Valores promedio por parcela de RVI entre 2019-2020.</h4>
+<h4 id="Sección4">Fig 7. Valores promedio por parcela de RVI entre Enero- Marzo de 2020.</h4>
 
 <p>Finalmente puede exportar las parcelas digitalizadas como archivo de extensión .shp a su cuenta de Google Drive desde donde puede descargarla y visualizarla fuera del entorno de GEE.</p>
 
@@ -228,7 +228,7 @@ fileFormat: 'SHP',
 <img src="Fig8.png" />
 <h4 id="Sección4">Fig 8. Exportar el archivo .shp desde Task.</h4>
 
-<p>Para exportar el RVI como un Geotiff puede utilizar la siguiente expresión. En este caso se exporta el RVI  para la imágen de diciembre 2019, puede replicar este proceso para el RVI de marzo 2020.</p>
+<p>Para exportar el RVI como un Geotiff puede utilizar la siguiente expresión. En este caso se exporta el RVI  para la imágen de enero de 2020, puede replicar este proceso para el RVI de marzo 2020.</p>
 
 ```javascript
 // Export the RVI. 
