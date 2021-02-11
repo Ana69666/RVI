@@ -125,9 +125,9 @@ print(collectionVVVH, 'Collection Sentinel-1')
  
 <p>A continuación se prepara la función que utiliza como base la fórmula del RVI. En este punto no hemos aplicado la fórmula sobre la colección es solo la preparación de la función.</p>
  
-// This function gets RVI from Sentinel-1 imagery. The formula of RVI was obtained from doi:10.3390/app10144764.
 
 ```javascript
+// This function gets RVI from Sentinel-1 imagery. The formula of RVI was obtained from doi:10.3390/app10144764.
 var addRVI = function(image) {
   return image.addBands(image.expression('(VV/(VV + VH))**0.5*(4*VH)/(VV + VH)', {
     'VV': image.select('VV'),
@@ -186,6 +186,7 @@ Map.addLayer(fit2, visParams,'RVI of the image 2020-03-13');
 
 
 ```javascript
+// The graphic is a mean of time series, January of 2020 to December of 2020, see the linear values the differences
 var chart = ui.Chart.image.doySeriesByRegion({
   imageCollection: RVICollection,
   bandName:'constant',
@@ -198,11 +199,10 @@ var chart = ui.Chart.image.doySeriesByRegion({
 
 <p>Para visualizar el gráfico (Fig 7) en el visualizador de capas (Layers) utilice la siguiente línea de código.</p>
 
-// Add the chart to the map. 
-// Note, in this case, the images not have a Speckle Filter and are a values of RVI that have been obtained with de conversion of dB to linear values
-
 
 ```javascript
+// Add the chart to the map. 
+// Note, in this case, the images not have a Speckle Filter and are a values of RVI that have been obtained with de conversion of dB to linear values
 chart.style().set({
   position: 'bottom-left',
   width: '500px',
